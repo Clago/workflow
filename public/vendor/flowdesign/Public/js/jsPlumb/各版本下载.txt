@@ -1,0 +1,5 @@
+https://github.com/sporritt/jsPlumb/releases
+
+
+1.4.0在IE8中有bug
+使用 1.3.16 兼容性目前最理想。

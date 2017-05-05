@@ -1,0 +1,1376 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://gmpg.org/xfn/11">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<title>Senamion.com - multiselect2side (multiple select double side) plugin: documentation and demo page</title>
+	<link rel="stylesheet" href="css/jquery.multiselect2side.css" type="text/css" media="screen" />
+	<script type="text/javascript" src="js/jquery.js" ></script>
+	<script type="text/javascript" src="js/jquery.multiselect2side.js" ></script>
+	<script type="text/javascript">
+		$().ready(function() {
+			$('#searchable').multiselect2side({
+				search: "Search: "
+			});
+			$('#first').multiselect2side({
+				optGroupSearch: "Group: ",
+				search: "<img src='img/search.gif' />"
+			});
+			$('#second').multiselect2side({
+				selectedPosition: 'right',
+				moveOptions: false,
+				labelsx: '',
+				labeldx: '',
+				autoSort: true,
+				autoSortAvailable: true
+				});
+			$('#third').multiselect2side({
+				selectedPosition: 'left',
+				moveOptions: true,
+				labelTop: '+ +',
+				labelBottom: '- -',
+				labelUp: '+',
+				labelDown: '-',
+				labelsx: '* Selected *',
+				labeldx: '* Available *',
+				search: "Find: "
+				});
+			$('#fourth').multiselect2side({maxSelected: 4});
+
+			$('.clickToView2').click(function() {
+				$(this).parent().prevAll("select:first").toggle();
+				return false;
+			});
+
+			$('.clickToView').click(function() {
+				elClick = $(this);
+				selEl = elClick.prevAll("select:first");
+
+				$.ajax({
+					url: 'jmultiselect2side.php',
+					data: selEl.serialize() + '&SELECTNAME=' + selEl.attr("name"),
+					success: function(data) {
+						elClick.next().next().next().html(data);
+					}
+				});
+				return false;
+			});
+
+
+		$('#fourth')
+			.multiselect2side('addOption', {name: 'test selected', value: 'test1', selected: true})
+			.multiselect2side('addOption', {name: 'test not selected', value: 'test2', selected: false});
+		$('#third')
+			.multiselect2side('addOption', {name: 'test selected', value: 'test1', selected: true})
+			.multiselect2side('addOption', {name: 'test not selected', value: 'test2', selected: false});
+		//$('#third').multiselect2side('destroy');
+		});
+	</script>
+
+
+
+
+</head>
+<body>
+
+				<h2>multiselect2side plugin: documentation and demo page</h2>
+
+				<h3>Demo Search - Full demo select multiple double side with search option true (1000 elements)</h3>
+				<p>Select multiple="multiple" modified by multiselect2side</p>
+
+				<select name="searchable[]" id='searchable' multiple='multiple' >
+					<option value='1'>Option strawberry 1 - India</option>
+					<option value='2'>Option apricot 2 - Italy</option>
+					<option value='3'>Option cherry 3 - USA</option>
+					<option value='4'>Option pineapple 4 - Holland</option>
+					<option value='5'>Option pineapple 5 - Mexico</option>
+					<option value='6'>Option pineapple 6 - Holland</option>
+					<option value='7'>Option pineapple 7 - USA</option>
+					<option value='8'>Option apricot 8 - India</option>
+					<option value='9'>Option pear 9 - Japan</option>
+					<option value='10'>Option melon 10 - Canada</option>
+					<option value='11'>Option melon 11 - Canada</option>
+					<option value='12'>Option melon 12 - China</option>
+					<option value='13'>Option apple 13 - Japan</option>
+					<option value='14'>Option orange 14 - Italy</option>
+					<option value='15'>Option cherry 15 - Canada</option>
+					<option value='16'>Option pear 16 - Germany</option>
+					<option value='17'>Option orange 17 - Italy</option>
+					<option value='18'>Option apricot 18 - Italy</option>
+					<option value='19'>Option orange 19 - Mexico</option>
+					<option value='20'>Option pineapple 20 - Germany</option>
+					<option value='21'>Option apricot 21 - USA</option>
+					<option value='22'>Option pear 22 - Mexico</option>
+					<option value='23'>Option pear 23 - India</option>
+					<option value='24'>Option pear 24 - Holland</option>
+					<option value='25'>Option apricot 25 - China</option>
+					<option value='26'>Option cherry 26 - Italy</option>
+					<option value='27'>Option apple 27 - USA</option>
+					<option value='28'>Option strawberry 28 - Italy</option>
+					<option value='29'>Option cherry 29 - Italy</option>
+					<option value='30'>Option orange 30 - Holland</option>
+					<option value='31'>Option pear 31 - France</option>
+					<option value='32'>Option pear 32 - Holland</option>
+					<option value='33'>Option melon 33 - Italy</option>
+					<option value='34'>Option pineapple 34 - Japan</option>
+					<option value='35'>Option pear 35 - Italy</option>
+					<option value='36'>Option melon 36 - USA</option>
+					<option value='37'>Option orange 37 - Japan</option>
+					<option value='38'>Option melon 38 - France</option>
+					<option value='39'>Option pineapple 39 - Germany</option>
+					<option value='40'>Option strawberry 40 - Canada</option>
+					<option value='41'>Option pineapple 41 - Germany</option>
+					<option value='42'>Option pear 42 - Japan</option>
+					<option value='43'>Option strawberry 43 - Canada</option>
+					<option value='44'>Option apricot 44 - Germany</option>
+					<option value='45'>Option pear 45 - China</option>
+					<option value='46'>Option pear 46 - Japan</option>
+					<option value='47'>Option pear 47 - Holland</option>
+					<option value='48'>Option orange 48 - Germany</option>
+					<option value='49'>Option pineapple 49 - Germany</option>
+					<option value='50'>Option pear 50 - India</option>
+					<option value='51'>Option cherry 51 - Germany</option>
+					<option value='52'>Option apple 52 - India</option>
+					<option value='53'>Option melon 53 - France</option>
+					<option value='54'>Option melon 54 - Italy</option>
+					<option value='55'>Option orange 55 - France</option>
+					<option value='56'>Option pear 56 - China</option>
+					<option value='57'>Option orange 57 - Holland</option>
+					<option value='58'>Option melon 58 - USA</option>
+					<option value='59'>Option cherry 59 - USA</option>
+					<option value='60'>Option strawberry 60 - Italy</option>
+					<option value='61'>Option strawberry 61 - USA</option>
+					<option value='62'>Option apricot 62 - Canada</option>
+					<option value='63'>Option apricot 63 - China</option>
+					<option value='64'>Option strawberry 64 - Canada</option>
+					<option value='65'>Option pineapple 65 - Mexico</option>
+					<option value='66'>Option orange 66 - Mexico</option>
+					<option value='67'>Option apple 67 - USA</option>
+					<option value='68'>Option pear 68 - France</option>
+					<option value='69'>Option apricot 69 - Germany</option>
+					<option value='70'>Option melon 70 - China</option>
+					<option value='71'>Option orange 71 - Germany</option>
+					<option value='72'>Option apricot 72 - Mexico</option>
+					<option value='73'>Option pear 73 - Italy</option>
+					<option value='74'>Option pineapple 74 - USA</option>
+					<option value='75'>Option orange 75 - France</option>
+					<option value='76'>Option orange 76 - USA</option>
+					<option value='77'>Option pineapple 77 - China</option>
+					<option value='78'>Option pear 78 - Mexico</option>
+					<option value='79'>Option apricot 79 - Mexico</option>
+					<option value='80'>Option pineapple 80 - Canada</option>
+					<option value='81'>Option apricot 81 - Germany</option>
+					<option value='82'>Option apricot 82 - Germany</option>
+					<option value='83'>Option strawberry 83 - India</option>
+					<option value='84'>Option orange 84 - Holland</option>
+					<option value='85'>Option cherry 85 - Germany</option>
+					<option value='86'>Option melon 86 - India</option>
+					<option value='87'>Option melon 87 - USA</option>
+					<option value='88'>Option pear 88 - China</option>
+					<option value='89'>Option orange 89 - China</option>
+					<option value='90'>Option strawberry 90 - France</option>
+					<option value='91'>Option pear 91 - USA</option>
+					<option value='92'>Option pineapple 92 - India</option>
+					<option value='93'>Option apple 93 - India</option>
+					<option value='94'>Option pear 94 - Germany</option>
+					<option value='95'>Option pear 95 - China</option>
+					<option value='96'>Option apple 96 - India</option>
+					<option value='97'>Option apricot 97 - Germany</option>
+					<option value='98'>Option apricot 98 - Holland</option>
+					<option value='99'>Option apricot 99 - India</option>
+					<option value='100'>Option orange 100 - France</option>
+					<option value='101'>Option apricot 101 - Japan</option>
+					<option value='102'>Option melon 102 - USA</option>
+					<option value='103'>Option cherry 103 - Germany</option>
+					<option value='104'>Option strawberry 104 - Italy</option>
+					<option value='105'>Option pineapple 105 - India</option>
+					<option value='106'>Option melon 106 - India</option>
+					<option value='107'>Option apple 107 - Italy</option>
+					<option value='108'>Option strawberry 108 - Italy</option>
+					<option value='109'>Option strawberry 109 - USA</option>
+					<option value='110'>Option cherry 110 - Canada</option>
+					<option value='111'>Option apple 111 - China</option>
+					<option value='112'>Option orange 112 - Germany</option>
+					<option value='113'>Option pineapple 113 - China</option>
+					<option value='114'>Option pear 114 - Canada</option>
+					<option value='115'>Option apricot 115 - Holland</option>
+					<option value='116'>Option apricot 116 - Mexico</option>
+					<option value='117'>Option orange 117 - USA</option>
+					<option value='118'>Option pineapple 118 - India</option>
+					<option value='119'>Option cherry 119 - France</option>
+					<option value='120'>Option strawberry 120 - France</option>
+					<option value='121'>Option pear 121 - Mexico</option>
+					<option value='122'>Option melon 122 - France</option>
+					<option value='123'>Option pear 123 - Mexico</option>
+					<option value='124'>Option melon 124 - Mexico</option>
+					<option value='125'>Option pineapple 125 - Canada</option>
+					<option value='126'>Option pineapple 126 - Holland</option>
+					<option value='127'>Option orange 127 - Japan</option>
+					<option value='128'>Option pear 128 - Germany</option>
+					<option value='129'>Option melon 129 - Japan</option>
+					<option value='130'>Option apple 130 - USA</option>
+					<option value='131'>Option orange 131 - Germany</option>
+					<option value='132'>Option pineapple 132 - Canada</option>
+					<option value='133'>Option cherry 133 - Italy</option>
+					<option value='134'>Option orange 134 - Japan</option>
+					<option value='135'>Option pineapple 135 - USA</option>
+					<option value='136'>Option orange 136 - China</option>
+					<option value='137'>Option melon 137 - Holland</option>
+					<option value='138'>Option pear 138 - China</option>
+					<option value='139'>Option cherry 139 - Germany</option>
+					<option value='140'>Option orange 140 - Mexico</option>
+					<option value='141'>Option apple 141 - Japan</option>
+					<option value='142'>Option strawberry 142 - USA</option>
+					<option value='143'>Option pear 143 - Canada</option>
+					<option value='144'>Option strawberry 144 - Germany</option>
+					<option value='145'>Option strawberry 145 - India</option>
+					<option value='146'>Option strawberry 146 - Italy</option>
+					<option value='147'>Option apricot 147 - France</option>
+					<option value='148'>Option pear 148 - Holland</option>
+					<option value='149'>Option pineapple 149 - France</option>
+					<option value='150'>Option orange 150 - Italy</option>
+					<option value='151'>Option pineapple 151 - Mexico</option>
+					<option value='152'>Option strawberry 152 - Italy</option>
+					<option value='153'>Option strawberry 153 - USA</option>
+					<option value='154'>Option strawberry 154 - Germany</option>
+					<option value='155'>Option strawberry 155 - Italy</option>
+					<option value='156'>Option apple 156 - India</option>
+					<option value='157'>Option apricot 157 - Italy</option>
+					<option value='158'>Option apple 158 - India</option>
+					<option value='159'>Option pear 159 - Italy</option>
+					<option value='160'>Option apricot 160 - USA</option>
+					<option value='161'>Option strawberry 161 - Japan</option>
+					<option value='162'>Option orange 162 - Japan</option>
+					<option value='163'>Option orange 163 - France</option>
+					<option value='164'>Option orange 164 - Japan</option>
+					<option value='165'>Option strawberry 165 - Mexico</option>
+					<option value='166'>Option apricot 166 - Holland</option>
+					<option value='167'>Option apricot 167 - Holland</option>
+					<option value='168'>Option pineapple 168 - Holland</option>
+					<option value='169'>Option cherry 169 - Holland</option>
+					<option value='170'>Option pear 170 - Japan</option>
+					<option value='171'>Option pineapple 171 - France</option>
+					<option value='172'>Option pineapple 172 - Canada</option>
+					<option value='173'>Option melon 173 - Germany</option>
+					<option value='174'>Option orange 174 - Germany</option>
+					<option value='175'>Option cherry 175 - India</option>
+					<option value='176'>Option strawberry 176 - Germany</option>
+					<option value='177'>Option apricot 177 - USA</option>
+					<option value='178'>Option pear 178 - Germany</option>
+					<option value='179'>Option pineapple 179 - Holland</option>
+					<option value='180'>Option melon 180 - Holland</option>
+					<option value='181'>Option cherry 181 - Italy</option>
+					<option value='182'>Option apple 182 - Holland</option>
+					<option value='183'>Option apricot 183 - Japan</option>
+					<option value='184'>Option orange 184 - Mexico</option>
+					<option value='185'>Option orange 185 - Holland</option>
+					<option value='186'>Option apple 186 - Germany</option>
+					<option value='187'>Option strawberry 187 - Japan</option>
+					<option value='188'>Option apple 188 - France</option>
+					<option value='189'>Option melon 189 - Canada</option>
+					<option value='190'>Option orange 190 - USA</option>
+					<option value='191'>Option pear 191 - USA</option>
+					<option value='192'>Option cherry 192 - China</option>
+					<option value='193'>Option pear 193 - Canada</option>
+					<option value='194'>Option apricot 194 - India</option>
+					<option value='195'>Option apricot 195 - Italy</option>
+					<option value='196'>Option melon 196 - Japan</option>
+					<option value='197'>Option apple 197 - Holland</option>
+					<option value='198'>Option orange 198 - Germany</option>
+					<option value='199'>Option pear 199 - Mexico</option>
+					<option value='200'>Option orange 200 - France</option>
+					<option value='201'>Option cherry 201 - Canada</option>
+					<option value='202'>Option pear 202 - China</option>
+					<option value='203'>Option strawberry 203 - Mexico</option>
+					<option value='204'>Option pear 204 - Canada</option>
+					<option value='205'>Option pineapple 205 - Holland</option>
+					<option value='206'>Option melon 206 - China</option>
+					<option value='207'>Option apricot 207 - Canada</option>
+					<option value='208'>Option apricot 208 - Italy</option>
+					<option value='209'>Option pineapple 209 - Mexico</option>
+					<option value='210'>Option strawberry 210 - Canada</option>
+					<option value='211'>Option melon 211 - France</option>
+					<option value='212'>Option cherry 212 - Holland</option>
+					<option value='213'>Option apple 213 - Italy</option>
+					<option value='214'>Option pear 214 - Canada</option>
+					<option value='215'>Option melon 215 - Holland</option>
+					<option value='216'>Option cherry 216 - Canada</option>
+					<option value='217'>Option apricot 217 - Italy</option>
+					<option value='218'>Option apple 218 - Japan</option>
+					<option value='219'>Option pear 219 - Mexico</option>
+					<option value='220'>Option strawberry 220 - India</option>
+					<option value='221'>Option strawberry 221 - Mexico</option>
+					<option value='222'>Option cherry 222 - Japan</option>
+					<option value='223'>Option apricot 223 - Holland</option>
+					<option value='224'>Option apricot 224 - USA</option>
+					<option value='225'>Option strawberry 225 - Japan</option>
+					<option value='226'>Option melon 226 - Mexico</option>
+					<option value='227'>Option orange 227 - Canada</option>
+					<option value='228'>Option strawberry 228 - USA</option>
+					<option value='229'>Option pear 229 - Canada</option>
+					<option value='230'>Option melon 230 - Germany</option>
+					<option value='231'>Option cherry 231 - Canada</option>
+					<option value='232'>Option apple 232 - France</option>
+					<option value='233'>Option pear 233 - USA</option>
+					<option value='234'>Option orange 234 - Japan</option>
+					<option value='235'>Option pineapple 235 - Italy</option>
+					<option value='236'>Option pineapple 236 - France</option>
+					<option value='237'>Option melon 237 - Mexico</option>
+					<option value='238'>Option apple 238 - Italy</option>
+					<option value='239'>Option strawberry 239 - Germany</option>
+					<option value='240'>Option orange 240 - Germany</option>
+					<option value='241'>Option melon 241 - Japan</option>
+					<option value='242'>Option orange 242 - Holland</option>
+					<option value='243'>Option strawberry 243 - Italy</option>
+					<option value='244'>Option apricot 244 - Canada</option>
+					<option value='245'>Option pear 245 - Canada</option>
+					<option value='246'>Option apple 246 - USA</option>
+					<option value='247'>Option melon 247 - Italy</option>
+					<option value='248'>Option pineapple 248 - Germany</option>
+					<option value='249'>Option orange 249 - Germany</option>
+					<option value='250'>Option melon 250 - Germany</option>
+					<option value='251'>Option cherry 251 - India</option>
+					<option value='252'>Option orange 252 - USA</option>
+					<option value='253'>Option pear 253 - Canada</option>
+					<option value='254'>Option orange 254 - USA</option>
+					<option value='255'>Option strawberry 255 - France</option>
+					<option value='256'>Option strawberry 256 - Mexico</option>
+					<option value='257'>Option apple 257 - USA</option>
+					<option value='258'>Option strawberry 258 - India</option>
+					<option value='259'>Option orange 259 - Japan</option>
+					<option value='260'>Option orange 260 - Holland</option>
+					<option value='261'>Option cherry 261 - Canada</option>
+					<option value='262'>Option apricot 262 - Mexico</option>
+					<option value='263'>Option orange 263 - Mexico</option>
+					<option value='264'>Option apple 264 - France</option>
+					<option value='265'>Option apple 265 - France</option>
+					<option value='266'>Option orange 266 - China</option>
+					<option value='267'>Option melon 267 - Mexico</option>
+					<option value='268'>Option apple 268 - Japan</option>
+					<option value='269'>Option pineapple 269 - Canada</option>
+					<option value='270'>Option cherry 270 - France</option>
+					<option value='271'>Option apricot 271 - China</option>
+					<option value='272'>Option cherry 272 - Germany</option>
+					<option value='273'>Option strawberry 273 - Germany</option>
+					<option value='274'>Option apricot 274 - USA</option>
+					<option value='275'>Option melon 275 - China</option>
+					<option value='276'>Option apricot 276 - Mexico</option>
+					<option value='277'>Option apple 277 - France</option>
+					<option value='278'>Option apricot 278 - Mexico</option>
+					<option value='279'>Option apricot 279 - Germany</option>
+					<option value='280'>Option cherry 280 - Germany</option>
+					<option value='281'>Option orange 281 - India</option>
+					<option value='282'>Option apricot 282 - Holland</option>
+					<option value='283'>Option orange 283 - Japan</option>
+					<option value='284'>Option orange 284 - Germany</option>
+					<option value='285'>Option strawberry 285 - Italy</option>
+					<option value='286'>Option pear 286 - Japan</option>
+					<option value='287'>Option strawberry 287 - USA</option>
+					<option value='288'>Option melon 288 - China</option>
+					<option value='289'>Option strawberry 289 - USA</option>
+					<option value='290'>Option strawberry 290 - Mexico</option>
+					<option value='291'>Option apple 291 - Japan</option>
+					<option value='292'>Option apricot 292 - USA</option>
+					<option value='293'>Option apple 293 - Mexico</option>
+					<option value='294'>Option melon 294 - China</option>
+					<option value='295'>Option apple 295 - Canada</option>
+					<option value='296'>Option pineapple 296 - Canada</option>
+					<option value='297'>Option orange 297 - Canada</option>
+					<option value='298'>Option cherry 298 - France</option>
+					<option value='299'>Option strawberry 299 - Italy</option>
+					<option value='300'>Option orange 300 - China</option>
+					<option value='301'>Option orange 301 - France</option>
+					<option value='302'>Option pineapple 302 - Italy</option>
+					<option value='303'>Option pineapple 303 - India</option>
+					<option value='304'>Option cherry 304 - France</option>
+					<option value='305'>Option orange 305 - China</option>
+					<option value='306'>Option cherry 306 - USA</option>
+					<option value='307'>Option melon 307 - Holland</option>
+					<option value='308'>Option pear 308 - Holland</option>
+					<option value='309'>Option strawberry 309 - Germany</option>
+					<option value='310'>Option melon 310 - Italy</option>
+					<option value='311'>Option apple 311 - India</option>
+					<option value='312'>Option pear 312 - USA</option>
+					<option value='313'>Option orange 313 - USA</option>
+					<option value='314'>Option pineapple 314 - USA</option>
+					<option value='315'>Option pear 315 - Germany</option>
+					<option value='316'>Option apple 316 - France</option>
+					<option value='317'>Option orange 317 - Holland</option>
+					<option value='318'>Option pineapple 318 - Germany</option>
+					<option value='319'>Option pineapple 319 - Mexico</option>
+					<option value='320'>Option orange 320 - Japan</option>
+					<option value='321'>Option orange 321 - Italy</option>
+					<option value='322'>Option cherry 322 - Japan</option>
+					<option value='323'>Option apricot 323 - USA</option>
+					<option value='324'>Option pear 324 - Holland</option>
+					<option value='325'>Option strawberry 325 - Japan</option>
+					<option value='326'>Option apricot 326 - China</option>
+					<option value='327'>Option pineapple 327 - India</option>
+					<option value='328'>Option apple 328 - China</option>
+					<option value='329'>Option orange 329 - Japan</option>
+					<option value='330'>Option strawberry 330 - France</option>
+					<option value='331'>Option melon 331 - India</option>
+					<option value='332'>Option strawberry 332 - Japan</option>
+					<option value='333'>Option pineapple 333 - France</option>
+					<option value='334'>Option melon 334 - USA</option>
+					<option value='335'>Option cherry 335 - Japan</option>
+					<option value='336'>Option cherry 336 - India</option>
+					<option value='337'>Option cherry 337 - Japan</option>
+					<option value='338'>Option apricot 338 - France</option>
+					<option value='339'>Option cherry 339 - India</option>
+					<option value='340'>Option apple 340 - Japan</option>
+					<option value='341'>Option pineapple 341 - Japan</option>
+					<option value='342'>Option pineapple 342 - USA</option>
+					<option value='343'>Option apricot 343 - Japan</option>
+					<option value='344'>Option apple 344 - China</option>
+					<option value='345'>Option pear 345 - India</option>
+					<option value='346'>Option pear 346 - Germany</option>
+					<option value='347'>Option strawberry 347 - Canada</option>
+					<option value='348'>Option melon 348 - France</option>
+					<option value='349'>Option pineapple 349 - India</option>
+					<option value='350'>Option pineapple 350 - France</option>
+					<option value='351'>Option pineapple 351 - Mexico</option>
+					<option value='352'>Option melon 352 - Mexico</option>
+					<option value='353'>Option apple 353 - Italy</option>
+					<option value='354'>Option cherry 354 - China</option>
+					<option value='355'>Option strawberry 355 - China</option>
+					<option value='356'>Option melon 356 - Holland</option>
+					<option value='357'>Option melon 357 - Italy</option>
+					<option value='358'>Option apricot 358 - USA</option>
+					<option value='359'>Option apricot 359 - Japan</option>
+					<option value='360'>Option strawberry 360 - Italy</option>
+					<option value='361'>Option apricot 361 - Canada</option>
+					<option value='362'>Option cherry 362 - Holland</option>
+					<option value='363'>Option melon 363 - Canada</option>
+					<option value='364'>Option apple 364 - USA</option>
+					<option value='365'>Option orange 365 - Holland</option>
+					<option value='366'>Option pineapple 366 - Germany</option>
+					<option value='367'>Option strawberry 367 - India</option>
+					<option value='368'>Option orange 368 - India</option>
+					<option value='369'>Option strawberry 369 - India</option>
+					<option value='370'>Option apricot 370 - India</option>
+					<option value='371'>Option apricot 371 - Canada</option>
+					<option value='372'>Option melon 372 - Canada</option>
+					<option value='373'>Option pear 373 - USA</option>
+					<option value='374'>Option melon 374 - Italy</option>
+					<option value='375'>Option cherry 375 - Mexico</option>
+					<option value='376'>Option apple 376 - France</option>
+					<option value='377'>Option apricot 377 - China</option>
+					<option value='378'>Option apple 378 - USA</option>
+					<option value='379'>Option orange 379 - Italy</option>
+					<option value='380'>Option pear 380 - Mexico</option>
+					<option value='381'>Option pineapple 381 - Germany</option>
+					<option value='382'>Option orange 382 - France</option>
+					<option value='383'>Option apricot 383 - Mexico</option>
+					<option value='384'>Option melon 384 - Japan</option>
+					<option value='385'>Option pear 385 - USA</option>
+					<option value='386'>Option pineapple 386 - India</option>
+					<option value='387'>Option pear 387 - India</option>
+					<option value='388'>Option orange 388 - Japan</option>
+					<option value='389'>Option apple 389 - Holland</option>
+					<option value='390'>Option apricot 390 - India</option>
+					<option value='391'>Option strawberry 391 - Japan</option>
+					<option value='392'>Option melon 392 - Japan</option>
+					<option value='393'>Option pineapple 393 - France</option>
+					<option value='394'>Option cherry 394 - Germany</option>
+					<option value='395'>Option melon 395 - Italy</option>
+					<option value='396'>Option orange 396 - Italy</option>
+					<option value='397'>Option cherry 397 - Mexico</option>
+					<option value='398'>Option pineapple 398 - Holland</option>
+					<option value='399'>Option apricot 399 - India</option>
+					<option value='400'>Option orange 400 - India</option>
+					<option value='401'>Option apple 401 - Germany</option>
+					<option value='402'>Option strawberry 402 - Mexico</option>
+					<option value='403'>Option apricot 403 - USA</option>
+					<option value='404'>Option apple 404 - China</option>
+					<option value='405'>Option apricot 405 - Japan</option>
+					<option value='406'>Option cherry 406 - Japan</option>
+					<option value='407'>Option pear 407 - Canada</option>
+					<option value='408'>Option pear 408 - India</option>
+					<option value='409'>Option apricot 409 - Italy</option>
+					<option value='410'>Option apricot 410 - USA</option>
+					<option value='411'>Option apple 411 - China</option>
+					<option value='412'>Option orange 412 - India</option>
+					<option value='413'>Option orange 413 - Germany</option>
+					<option value='414'>Option melon 414 - China</option>
+					<option value='415'>Option apricot 415 - Japan</option>
+					<option value='416'>Option apricot 416 - Germany</option>
+					<option value='417'>Option pear 417 - Japan</option>
+					<option value='418'>Option orange 418 - Italy</option>
+					<option value='419'>Option apricot 419 - USA</option>
+					<option value='420'>Option strawberry 420 - France</option>
+					<option value='421'>Option cherry 421 - Germany</option>
+					<option value='422'>Option orange 422 - USA</option>
+					<option value='423'>Option strawberry 423 - France</option>
+					<option value='424'>Option apple 424 - Japan</option>
+					<option value='425'>Option melon 425 - Germany</option>
+					<option value='426'>Option cherry 426 - Holland</option>
+					<option value='427'>Option pineapple 427 - India</option>
+					<option value='428'>Option pineapple 428 - Germany</option>
+					<option value='429'>Option apricot 429 - India</option>
+					<option value='430'>Option pineapple 430 - France</option>
+					<option value='431'>Option pineapple 431 - Mexico</option>
+					<option value='432'>Option orange 432 - India</option>
+					<option value='433'>Option strawberry 433 - Mexico</option>
+					<option value='434'>Option apple 434 - Germany</option>
+					<option value='435'>Option pineapple 435 - India</option>
+					<option value='436'>Option orange 436 - Mexico</option>
+					<option value='437'>Option apricot 437 - Canada</option>
+					<option value='438'>Option melon 438 - Germany</option>
+					<option value='439'>Option apricot 439 - Holland</option>
+					<option value='440'>Option pear 440 - Canada</option>
+					<option value='441'>Option pear 441 - USA</option>
+					<option value='442'>Option cherry 442 - China</option>
+					<option value='443'>Option apple 443 - Mexico</option>
+					<option value='444'>Option apricot 444 - China</option>
+					<option value='445'>Option pear 445 - Canada</option>
+					<option value='446'>Option pear 446 - China</option>
+					<option value='447'>Option pineapple 447 - Holland</option>
+					<option value='448'>Option apricot 448 - Holland</option>
+					<option value='449'>Option cherry 449 - Germany</option>
+					<option value='450'>Option orange 450 - Mexico</option>
+					<option value='451'>Option apricot 451 - Mexico</option>
+					<option value='452'>Option apricot 452 - France</option>
+					<option value='453'>Option apricot 453 - USA</option>
+					<option value='454'>Option orange 454 - France</option>
+					<option value='455'>Option apricot 455 - Holland</option>
+					<option value='456'>Option pineapple 456 - Italy</option>
+					<option value='457'>Option pineapple 457 - France</option>
+					<option value='458'>Option cherry 458 - Germany</option>
+					<option value='459'>Option apricot 459 - Holland</option>
+					<option value='460'>Option pineapple 460 - India</option>
+					<option value='461'>Option apricot 461 - China</option>
+					<option value='462'>Option cherry 462 - Canada</option>
+					<option value='463'>Option melon 463 - Holland</option>
+					<option value='464'>Option cherry 464 - Canada</option>
+					<option value='465'>Option pear 465 - Italy</option>
+					<option value='466'>Option apricot 466 - Italy</option>
+					<option value='467'>Option melon 467 - Mexico</option>
+					<option value='468'>Option melon 468 - USA</option>
+					<option value='469'>Option pineapple 469 - Japan</option>
+					<option value='470'>Option pineapple 470 - Canada</option>
+					<option value='471'>Option orange 471 - USA</option>
+					<option value='472'>Option pear 472 - Germany</option>
+					<option value='473'>Option pineapple 473 - USA</option>
+					<option value='474'>Option melon 474 - Canada</option>
+					<option value='475'>Option apricot 475 - Italy</option>
+					<option value='476'>Option orange 476 - Mexico</option>
+					<option value='477'>Option strawberry 477 - Italy</option>
+					<option value='478'>Option apricot 478 - Mexico</option>
+					<option value='479'>Option pineapple 479 - France</option>
+					<option value='480'>Option apricot 480 - China</option>
+					<option value='481'>Option pineapple 481 - Canada</option>
+					<option value='482'>Option cherry 482 - India</option>
+					<option value='483'>Option apricot 483 - Mexico</option>
+					<option value='484'>Option apple 484 - Canada</option>
+					<option value='485'>Option strawberry 485 - Japan</option>
+					<option value='486'>Option pineapple 486 - Italy</option>
+					<option value='487'>Option cherry 487 - Germany</option>
+					<option value='488'>Option cherry 488 - Mexico</option>
+					<option value='489'>Option strawberry 489 - Mexico</option>
+					<option value='490'>Option pineapple 490 - Japan</option>
+					<option value='491'>Option melon 491 - China</option>
+					<option value='492'>Option apple 492 - France</option>
+					<option value='493'>Option cherry 493 - Germany</option>
+					<option value='494'>Option cherry 494 - Mexico</option>
+					<option value='495'>Option orange 495 - France</option>
+					<option value='496'>Option orange 496 - Germany</option>
+					<option value='497'>Option apricot 497 - India</option>
+					<option value='498'>Option apricot 498 - Mexico</option>
+					<option value='499'>Option pear 499 - Germany</option>
+					<option value='500'>Option pineapple 500 - Canada</option>
+					<option value='501'>Option melon 501 - Italy</option>
+					<option value='502'>Option pear 502 - USA</option>
+					<option value='503'>Option cherry 503 - USA</option>
+					<option value='504'>Option melon 504 - China</option>
+					<option value='505'>Option melon 505 - Italy</option>
+					<option value='506'>Option melon 506 - India</option>
+					<option value='507'>Option cherry 507 - France</option>
+					<option value='508'>Option pear 508 - Japan</option>
+					<option value='509'>Option orange 509 - USA</option>
+					<option value='510'>Option apple 510 - Mexico</option>
+					<option value='511'>Option pineapple 511 - USA</option>
+					<option value='512'>Option apple 512 - Canada</option>
+					<option value='513'>Option apple 513 - Germany</option>
+					<option value='514'>Option pineapple 514 - Mexico</option>
+					<option value='515'>Option pineapple 515 - USA</option>
+					<option value='516'>Option pineapple 516 - India</option>
+					<option value='517'>Option orange 517 - China</option>
+					<option value='518'>Option apple 518 - Italy</option>
+					<option value='519'>Option apple 519 - Holland</option>
+					<option value='520'>Option cherry 520 - Holland</option>
+					<option value='521'>Option apricot 521 - Canada</option>
+					<option value='522'>Option melon 522 - Holland</option>
+					<option value='523'>Option apricot 523 - China</option>
+					<option value='524'>Option orange 524 - India</option>
+					<option value='525'>Option strawberry 525 - USA</option>
+					<option value='526'>Option pear 526 - France</option>
+					<option value='527'>Option pear 527 - Mexico</option>
+					<option value='528'>Option apricot 528 - France</option>
+					<option value='529'>Option orange 529 - Mexico</option>
+					<option value='530'>Option cherry 530 - Germany</option>
+					<option value='531'>Option melon 531 - France</option>
+					<option value='532'>Option apricot 532 - Japan</option>
+					<option value='533'>Option pear 533 - Germany</option>
+					<option value='534'>Option pineapple 534 - Mexico</option>
+					<option value='535'>Option pear 535 - France</option>
+					<option value='536'>Option strawberry 536 - Italy</option>
+					<option value='537'>Option apricot 537 - Mexico</option>
+					<option value='538'>Option pineapple 538 - France</option>
+					<option value='539'>Option orange 539 - Germany</option>
+					<option value='540'>Option pear 540 - USA</option>
+					<option value='541'>Option strawberry 541 - Japan</option>
+					<option value='542'>Option pineapple 542 - Canada</option>
+					<option value='543'>Option strawberry 543 - Mexico</option>
+					<option value='544'>Option apricot 544 - USA</option>
+					<option value='545'>Option apricot 545 - Holland</option>
+					<option value='546'>Option cherry 546 - Italy</option>
+					<option value='547'>Option strawberry 547 - France</option>
+					<option value='548'>Option apricot 548 - Mexico</option>
+					<option value='549'>Option pear 549 - Mexico</option>
+					<option value='550'>Option apricot 550 - Japan</option>
+					<option value='551'>Option cherry 551 - Japan</option>
+					<option value='552'>Option apricot 552 - France</option>
+					<option value='553'>Option strawberry 553 - USA</option>
+					<option value='554'>Option strawberry 554 - USA</option>
+					<option value='555'>Option strawberry 555 - Canada</option>
+					<option value='556'>Option pear 556 - China</option>
+					<option value='557'>Option strawberry 557 - China</option>
+					<option value='558'>Option apple 558 - China</option>
+					<option value='559'>Option orange 559 - Germany</option>
+					<option value='560'>Option strawberry 560 - China</option>
+					<option value='561'>Option pear 561 - China</option>
+					<option value='562'>Option strawberry 562 - Mexico</option>
+					<option value='563'>Option pear 563 - Japan</option>
+					<option value='564'>Option pineapple 564 - Holland</option>
+					<option value='565'>Option strawberry 565 - Mexico</option>
+					<option value='566'>Option orange 566 - Germany</option>
+					<option value='567'>Option strawberry 567 - China</option>
+					<option value='568'>Option orange 568 - India</option>
+					<option value='569'>Option apple 569 - USA</option>
+					<option value='570'>Option apple 570 - India</option>
+					<option value='571'>Option pear 571 - Mexico</option>
+					<option value='572'>Option apricot 572 - Canada</option>
+					<option value='573'>Option pear 573 - China</option>
+					<option value='574'>Option orange 574 - France</option>
+					<option value='575'>Option pineapple 575 - USA</option>
+					<option value='576'>Option pear 576 - India</option>
+					<option value='577'>Option strawberry 577 - Canada</option>
+					<option value='578'>Option orange 578 - Canada</option>
+					<option value='579'>Option strawberry 579 - China</option>
+					<option value='580'>Option cherry 580 - China</option>
+					<option value='581'>Option orange 581 - India</option>
+					<option value='582'>Option pineapple 582 - Italy</option>
+					<option value='583'>Option cherry 583 - Germany</option>
+					<option value='584'>Option strawberry 584 - China</option>
+					<option value='585'>Option cherry 585 - Italy</option>
+					<option value='586'>Option apricot 586 - Canada</option>
+					<option value='587'>Option melon 587 - France</option>
+					<option value='588'>Option melon 588 - Japan</option>
+					<option value='589'>Option pear 589 - Japan</option>
+					<option value='590'>Option orange 590 - China</option>
+					<option value='591'>Option apricot 591 - France</option>
+					<option value='592'>Option cherry 592 - Japan</option>
+					<option value='593'>Option cherry 593 - Italy</option>
+					<option value='594'>Option strawberry 594 - Germany</option>
+					<option value='595'>Option strawberry 595 - Germany</option>
+					<option value='596'>Option pineapple 596 - Italy</option>
+					<option value='597'>Option apricot 597 - USA</option>
+					<option value='598'>Option orange 598 - Holland</option>
+					<option value='599'>Option strawberry 599 - USA</option>
+					<option value='600'>Option melon 600 - Germany</option>
+					<option value='601'>Option orange 601 - USA</option>
+					<option value='602'>Option strawberry 602 - Japan</option>
+					<option value='603'>Option pineapple 603 - France</option>
+					<option value='604'>Option pear 604 - China</option>
+					<option value='605'>Option apple 605 - France</option>
+					<option value='606'>Option cherry 606 - Germany</option>
+					<option value='607'>Option strawberry 607 - Holland</option>
+					<option value='608'>Option melon 608 - Germany</option>
+					<option value='609'>Option apricot 609 - France</option>
+					<option value='610'>Option melon 610 - Japan</option>
+					<option value='611'>Option orange 611 - Italy</option>
+					<option value='612'>Option apricot 612 - India</option>
+					<option value='613'>Option orange 613 - China</option>
+					<option value='614'>Option melon 614 - Italy</option>
+					<option value='615'>Option apple 615 - China</option>
+					<option value='616'>Option cherry 616 - Canada</option>
+					<option value='617'>Option strawberry 617 - Germany</option>
+					<option value='618'>Option strawberry 618 - Holland</option>
+					<option value='619'>Option orange 619 - Canada</option>
+					<option value='620'>Option melon 620 - Canada</option>
+					<option value='621'>Option apricot 621 - USA</option>
+					<option value='622'>Option apple 622 - Japan</option>
+					<option value='623'>Option apricot 623 - France</option>
+					<option value='624'>Option pear 624 - France</option>
+					<option value='625'>Option strawberry 625 - China</option>
+					<option value='626'>Option apple 626 - Italy</option>
+					<option value='627'>Option cherry 627 - Germany</option>
+					<option value='628'>Option strawberry 628 - India</option>
+					<option value='629'>Option pineapple 629 - France</option>
+					<option value='630'>Option apple 630 - Japan</option>
+					<option value='631'>Option pear 631 - China</option>
+					<option value='632'>Option strawberry 632 - Canada</option>
+					<option value='633'>Option pineapple 633 - China</option>
+					<option value='634'>Option cherry 634 - Germany</option>
+					<option value='635'>Option apple 635 - USA</option>
+					<option value='636'>Option strawberry 636 - Germany</option>
+					<option value='637'>Option pear 637 - India</option>
+					<option value='638'>Option pear 638 - Italy</option>
+					<option value='639'>Option melon 639 - Germany</option>
+					<option value='640'>Option melon 640 - Mexico</option>
+					<option value='641'>Option pineapple 641 - France</option>
+					<option value='642'>Option melon 642 - Mexico</option>
+					<option value='643'>Option orange 643 - Mexico</option>
+					<option value='644'>Option pear 644 - Germany</option>
+					<option value='645'>Option cherry 645 - Mexico</option>
+					<option value='646'>Option pear 646 - Italy</option>
+					<option value='647'>Option orange 647 - Canada</option>
+					<option value='648'>Option pear 648 - Germany</option>
+					<option value='649'>Option apple 649 - Italy</option>
+					<option value='650'>Option pineapple 650 - Italy</option>
+					<option value='651'>Option orange 651 - Holland</option>
+					<option value='652'>Option cherry 652 - France</option>
+					<option value='653'>Option pineapple 653 - USA</option>
+					<option value='654'>Option melon 654 - India</option>
+					<option value='655'>Option cherry 655 - China</option>
+					<option value='656'>Option pear 656 - Mexico</option>
+					<option value='657'>Option pear 657 - Germany</option>
+					<option value='658'>Option apricot 658 - France</option>
+					<option value='659'>Option apple 659 - Italy</option>
+					<option value='660'>Option orange 660 - China</option>
+					<option value='661'>Option melon 661 - France</option>
+					<option value='662'>Option strawberry 662 - Japan</option>
+					<option value='663'>Option apricot 663 - USA</option>
+					<option value='664'>Option melon 664 - Germany</option>
+					<option value='665'>Option orange 665 - India</option>
+					<option value='666'>Option cherry 666 - Mexico</option>
+					<option value='667'>Option melon 667 - Holland</option>
+					<option value='668'>Option cherry 668 - India</option>
+					<option value='669'>Option apricot 669 - Canada</option>
+					<option value='670'>Option strawberry 670 - Holland</option>
+					<option value='671'>Option apple 671 - Canada</option>
+					<option value='672'>Option strawberry 672 - France</option>
+					<option value='673'>Option apple 673 - Germany</option>
+					<option value='674'>Option cherry 674 - USA</option>
+					<option value='675'>Option cherry 675 - India</option>
+					<option value='676'>Option apple 676 - Canada</option>
+					<option value='677'>Option melon 677 - India</option>
+					<option value='678'>Option strawberry 678 - USA</option>
+					<option value='679'>Option orange 679 - Mexico</option>
+					<option value='680'>Option strawberry 680 - Mexico</option>
+					<option value='681'>Option pear 681 - Germany</option>
+					<option value='682'>Option apricot 682 - China</option>
+					<option value='683'>Option pear 683 - Holland</option>
+					<option value='684'>Option cherry 684 - Italy</option>
+					<option value='685'>Option cherry 685 - Germany</option>
+					<option value='686'>Option apricot 686 - China</option>
+					<option value='687'>Option apple 687 - Holland</option>
+					<option value='688'>Option pear 688 - Italy</option>
+					<option value='689'>Option pear 689 - USA</option>
+					<option value='690'>Option orange 690 - Italy</option>
+					<option value='691'>Option apple 691 - Canada</option>
+					<option value='692'>Option pear 692 - Holland</option>
+					<option value='693'>Option orange 693 - Canada</option>
+					<option value='694'>Option apricot 694 - Mexico</option>
+					<option value='695'>Option apricot 695 - Japan</option>
+					<option value='696'>Option apricot 696 - Italy</option>
+					<option value='697'>Option pear 697 - France</option>
+					<option value='698'>Option cherry 698 - Japan</option>
+					<option value='699'>Option strawberry 699 - Japan</option>
+					<option value='700'>Option apricot 700 - Germany</option>
+					<option value='701'>Option melon 701 - Mexico</option>
+					<option value='702'>Option apricot 702 - France</option>
+					<option value='703'>Option strawberry 703 - India</option>
+					<option value='704'>Option pineapple 704 - Canada</option>
+					<option value='705'>Option apple 705 - Germany</option>
+					<option value='706'>Option pear 706 - USA</option>
+					<option value='707'>Option apple 707 - Germany</option>
+					<option value='708'>Option apricot 708 - Canada</option>
+					<option value='709'>Option apple 709 - France</option>
+					<option value='710'>Option pineapple 710 - Japan</option>
+					<option value='711'>Option apple 711 - Canada</option>
+					<option value='712'>Option apricot 712 - France</option>
+					<option value='713'>Option apricot 713 - Holland</option>
+					<option value='714'>Option orange 714 - Japan</option>
+					<option value='715'>Option orange 715 - China</option>
+					<option value='716'>Option melon 716 - Japan</option>
+					<option value='717'>Option pear 717 - USA</option>
+					<option value='718'>Option apple 718 - Canada</option>
+					<option value='719'>Option apple 719 - Holland</option>
+					<option value='720'>Option melon 720 - USA</option>
+					<option value='721'>Option pear 721 - China</option>
+					<option value='722'>Option pear 722 - Mexico</option>
+					<option value='723'>Option pineapple 723 - Italy</option>
+					<option value='724'>Option pineapple 724 - Holland</option>
+					<option value='725'>Option melon 725 - USA</option>
+					<option value='726'>Option orange 726 - Holland</option>
+					<option value='727'>Option melon 727 - India</option>
+					<option value='728'>Option apple 728 - USA</option>
+					<option value='729'>Option melon 729 - USA</option>
+					<option value='730'>Option cherry 730 - Germany</option>
+					<option value='731'>Option apple 731 - Canada</option>
+					<option value='732'>Option pear 732 - Mexico</option>
+					<option value='733'>Option melon 733 - Mexico</option>
+					<option value='734'>Option pineapple 734 - France</option>
+					<option value='735'>Option strawberry 735 - Italy</option>
+					<option value='736'>Option pineapple 736 - Canada</option>
+					<option value='737'>Option cherry 737 - China</option>
+					<option value='738'>Option pineapple 738 - Mexico</option>
+					<option value='739'>Option strawberry 739 - Italy</option>
+					<option value='740'>Option cherry 740 - France</option>
+					<option value='741'>Option orange 741 - Italy</option>
+					<option value='742'>Option apple 742 - Japan</option>
+					<option value='743'>Option strawberry 743 - Italy</option>
+					<option value='744'>Option apricot 744 - France</option>
+					<option value='745'>Option pear 745 - Holland</option>
+					<option value='746'>Option orange 746 - Mexico</option>
+					<option value='747'>Option cherry 747 - France</option>
+					<option value='748'>Option apricot 748 - Canada</option>
+					<option value='749'>Option cherry 749 - Canada</option>
+					<option value='750'>Option apricot 750 - Germany</option>
+					<option value='751'>Option orange 751 - Canada</option>
+					<option value='752'>Option strawberry 752 - Italy</option>
+					<option value='753'>Option orange 753 - Holland</option>
+					<option value='754'>Option pear 754 - Italy</option>
+					<option value='755'>Option pineapple 755 - USA</option>
+					<option value='756'>Option melon 756 - Germany</option>
+					<option value='757'>Option orange 757 - France</option>
+					<option value='758'>Option melon 758 - USA</option>
+					<option value='759'>Option pineapple 759 - USA</option>
+					<option value='760'>Option pineapple 760 - Germany</option>
+					<option value='761'>Option apricot 761 - Germany</option>
+					<option value='762'>Option apple 762 - Holland</option>
+					<option value='763'>Option pear 763 - Germany</option>
+					<option value='764'>Option cherry 764 - USA</option>
+					<option value='765'>Option strawberry 765 - France</option>
+					<option value='766'>Option strawberry 766 - USA</option>
+					<option value='767'>Option apricot 767 - China</option>
+					<option value='768'>Option orange 768 - China</option>
+					<option value='769'>Option melon 769 - Holland</option>
+					<option value='770'>Option strawberry 770 - Italy</option>
+					<option value='771'>Option apricot 771 - Mexico</option>
+					<option value='772'>Option cherry 772 - India</option>
+					<option value='773'>Option cherry 773 - Canada</option>
+					<option value='774'>Option apple 774 - Mexico</option>
+					<option value='775'>Option pear 775 - Germany</option>
+					<option value='776'>Option orange 776 - Italy</option>
+					<option value='777'>Option melon 777 - Canada</option>
+					<option value='778'>Option pineapple 778 - Germany</option>
+					<option value='779'>Option apple 779 - Mexico</option>
+					<option value='780'>Option strawberry 780 - Italy</option>
+					<option value='781'>Option cherry 781 - Germany</option>
+					<option value='782'>Option pear 782 - Holland</option>
+					<option value='783'>Option apricot 783 - France</option>
+					<option value='784'>Option melon 784 - Italy</option>
+					<option value='785'>Option apple 785 - Canada</option>
+					<option value='786'>Option apple 786 - Germany</option>
+					<option value='787'>Option apricot 787 - India</option>
+					<option value='788'>Option apricot 788 - France</option>
+					<option value='789'>Option apple 789 - China</option>
+					<option value='790'>Option cherry 790 - France</option>
+					<option value='791'>Option pineapple 791 - Italy</option>
+					<option value='792'>Option melon 792 - India</option>
+					<option value='793'>Option pear 793 - Italy</option>
+					<option value='794'>Option apricot 794 - France</option>
+					<option value='795'>Option melon 795 - Japan</option>
+					<option value='796'>Option melon 796 - Canada</option>
+					<option value='797'>Option melon 797 - Germany</option>
+					<option value='798'>Option cherry 798 - Italy</option>
+					<option value='799'>Option orange 799 - USA</option>
+					<option value='800'>Option orange 800 - Canada</option>
+					<option value='801'>Option melon 801 - Canada</option>
+					<option value='802'>Option apple 802 - Italy</option>
+					<option value='803'>Option orange 803 - Germany</option>
+					<option value='804'>Option pineapple 804 - Canada</option>
+					<option value='805'>Option pineapple 805 - Mexico</option>
+					<option value='806'>Option apricot 806 - Italy</option>
+					<option value='807'>Option melon 807 - Canada</option>
+					<option value='808'>Option apple 808 - Germany</option>
+					<option value='809'>Option pear 809 - Germany</option>
+					<option value='810'>Option orange 810 - Japan</option>
+					<option value='811'>Option melon 811 - Japan</option>
+					<option value='812'>Option strawberry 812 - China</option>
+					<option value='813'>Option melon 813 - Japan</option>
+					<option value='814'>Option cherry 814 - Japan</option>
+					<option value='815'>Option cherry 815 - Italy</option>
+					<option value='816'>Option strawberry 816 - Canada</option>
+					<option value='817'>Option pear 817 - India</option>
+					<option value='818'>Option pear 818 - France</option>
+					<option value='819'>Option cherry 819 - China</option>
+					<option value='820'>Option cherry 820 - Mexico</option>
+					<option value='821'>Option orange 821 - Holland</option>
+					<option value='822'>Option melon 822 - Holland</option>
+					<option value='823'>Option apricot 823 - Holland</option>
+					<option value='824'>Option pear 824 - India</option>
+					<option value='825'>Option pear 825 - France</option>
+					<option value='826'>Option apricot 826 - Germany</option>
+					<option value='827'>Option apple 827 - Holland</option>
+					<option value='828'>Option pineapple 828 - France</option>
+					<option value='829'>Option pear 829 - France</option>
+					<option value='830'>Option apple 830 - Italy</option>
+					<option value='831'>Option melon 831 - Italy</option>
+					<option value='832'>Option pear 832 - Germany</option>
+					<option value='833'>Option apple 833 - Japan</option>
+					<option value='834'>Option orange 834 - Germany</option>
+					<option value='835'>Option melon 835 - India</option>
+					<option value='836'>Option orange 836 - Holland</option>
+					<option value='837'>Option melon 837 - Japan</option>
+					<option value='838'>Option orange 838 - USA</option>
+					<option value='839'>Option orange 839 - France</option>
+					<option value='840'>Option orange 840 - France</option>
+					<option value='841'>Option strawberry 841 - China</option>
+					<option value='842'>Option orange 842 - India</option>
+					<option value='843'>Option melon 843 - Germany</option>
+					<option value='844'>Option melon 844 - Japan</option>
+					<option value='845'>Option orange 845 - France</option>
+					<option value='846'>Option cherry 846 - Holland</option>
+					<option value='847'>Option melon 847 - USA</option>
+					<option value='848'>Option pear 848 - France</option>
+					<option value='849'>Option apricot 849 - France</option>
+					<option value='850'>Option pear 850 - USA</option>
+					<option value='851'>Option melon 851 - France</option>
+					<option value='852'>Option apricot 852 - India</option>
+					<option value='853'>Option apple 853 - China</option>
+					<option value='854'>Option apple 854 - USA</option>
+					<option value='855'>Option pear 855 - Canada</option>
+					<option value='856'>Option apricot 856 - Canada</option>
+					<option value='857'>Option orange 857 - China</option>
+					<option value='858'>Option orange 858 - Holland</option>
+					<option value='859'>Option pineapple 859 - Holland</option>
+					<option value='860'>Option orange 860 - Japan</option>
+					<option value='861'>Option apple 861 - Italy</option>
+					<option value='862'>Option orange 862 - Holland</option>
+					<option value='863'>Option orange 863 - Holland</option>
+					<option value='864'>Option apple 864 - China</option>
+					<option value='865'>Option apple 865 - Canada</option>
+					<option value='866'>Option strawberry 866 - France</option>
+					<option value='867'>Option apricot 867 - Germany</option>
+					<option value='868'>Option melon 868 - Germany</option>
+					<option value='869'>Option pineapple 869 - Holland</option>
+					<option value='870'>Option strawberry 870 - India</option>
+					<option value='871'>Option cherry 871 - Holland</option>
+					<option value='872'>Option orange 872 - India</option>
+					<option value='873'>Option melon 873 - Canada</option>
+					<option value='874'>Option pineapple 874 - India</option>
+					<option value='875'>Option cherry 875 - Germany</option>
+					<option value='876'>Option apricot 876 - China</option>
+					<option value='877'>Option cherry 877 - China</option>
+					<option value='878'>Option melon 878 - India</option>
+					<option value='879'>Option melon 879 - Mexico</option>
+					<option value='880'>Option cherry 880 - France</option>
+					<option value='881'>Option apricot 881 - Germany</option>
+					<option value='882'>Option strawberry 882 - France</option>
+					<option value='883'>Option melon 883 - Mexico</option>
+					<option value='884'>Option orange 884 - Italy</option>
+					<option value='885'>Option strawberry 885 - USA</option>
+					<option value='886'>Option strawberry 886 - Germany</option>
+					<option value='887'>Option apricot 887 - Italy</option>
+					<option value='888'>Option apricot 888 - USA</option>
+					<option value='889'>Option melon 889 - USA</option>
+					<option value='890'>Option orange 890 - Canada</option>
+					<option value='891'>Option strawberry 891 - Germany</option>
+					<option value='892'>Option apple 892 - Germany</option>
+					<option value='893'>Option apricot 893 - France</option>
+					<option value='894'>Option pineapple 894 - Italy</option>
+					<option value='895'>Option cherry 895 - Mexico</option>
+					<option value='896'>Option melon 896 - Holland</option>
+					<option value='897'>Option apple 897 - France</option>
+					<option value='898'>Option strawberry 898 - Holland</option>
+					<option value='899'>Option cherry 899 - USA</option>
+					<option value='900'>Option pineapple 900 - Germany</option>
+					<option value='901'>Option pear 901 - Holland</option>
+					<option value='902'>Option melon 902 - Italy</option>
+					<option value='903'>Option apricot 903 - Italy</option>
+					<option value='904'>Option orange 904 - Italy</option>
+					<option value='905'>Option pear 905 - Mexico</option>
+					<option value='906'>Option pear 906 - Canada</option>
+					<option value='907'>Option apple 907 - Mexico</option>
+					<option value='908'>Option strawberry 908 - Germany</option>
+					<option value='909'>Option cherry 909 - Holland</option>
+					<option value='910'>Option apricot 910 - Japan</option>
+					<option value='911'>Option strawberry 911 - Canada</option>
+					<option value='912'>Option orange 912 - Italy</option>
+					<option value='913'>Option apricot 913 - USA</option>
+					<option value='914'>Option pineapple 914 - Holland</option>
+					<option value='915'>Option pear 915 - USA</option>
+					<option value='916'>Option orange 916 - Holland</option>
+					<option value='917'>Option apricot 917 - Japan</option>
+					<option value='918'>Option pineapple 918 - Mexico</option>
+					<option value='919'>Option cherry 919 - China</option>
+					<option value='920'>Option melon 920 - Italy</option>
+					<option value='921'>Option apple 921 - Japan</option>
+					<option value='922'>Option orange 922 - USA</option>
+					<option value='923'>Option apple 923 - USA</option>
+					<option value='924'>Option strawberry 924 - China</option>
+					<option value='925'>Option apricot 925 - Japan</option>
+					<option value='926'>Option pineapple 926 - Holland</option>
+					<option value='927'>Option strawberry 927 - Germany</option>
+					<option value='928'>Option pineapple 928 - Holland</option>
+					<option value='929'>Option strawberry 929 - USA</option>
+					<option value='930'>Option apple 930 - Canada</option>
+					<option value='931'>Option pear 931 - Mexico</option>
+					<option value='932'>Option strawberry 932 - Italy</option>
+					<option value='933'>Option apple 933 - Holland</option>
+					<option value='934'>Option melon 934 - Germany</option>
+					<option value='935'>Option pear 935 - Germany</option>
+					<option value='936'>Option cherry 936 - France</option>
+					<option value='937'>Option melon 937 - Italy</option>
+					<option value='938'>Option apricot 938 - France</option>
+					<option value='939'>Option orange 939 - Holland</option>
+					<option value='940'>Option pear 940 - China</option>
+					<option value='941'>Option orange 941 - China</option>
+					<option value='942'>Option melon 942 - Italy</option>
+					<option value='943'>Option pineapple 943 - Italy</option>
+					<option value='944'>Option apricot 944 - Holland</option>
+					<option value='945'>Option orange 945 - Germany</option>
+					<option value='946'>Option strawberry 946 - France</option>
+					<option value='947'>Option apple 947 - Germany</option>
+					<option value='948'>Option pineapple 948 - USA</option>
+					<option value='949'>Option pear 949 - India</option>
+					<option value='950'>Option strawberry 950 - Japan</option>
+					<option value='951'>Option apricot 951 - Germany</option>
+					<option value='952'>Option apple 952 - USA</option>
+					<option value='953'>Option cherry 953 - Germany</option>
+					<option value='954'>Option pineapple 954 - India</option>
+					<option value='955'>Option orange 955 - India</option>
+					<option value='956'>Option cherry 956 - France</option>
+					<option value='957'>Option cherry 957 - Canada</option>
+					<option value='958'>Option melon 958 - Mexico</option>
+					<option value='959'>Option pear 959 - USA</option>
+					<option value='960'>Option strawberry 960 - France</option>
+					<option value='961'>Option strawberry 961 - China</option>
+					<option value='962'>Option strawberry 962 - Italy</option>
+					<option value='963'>Option apricot 963 - France</option>
+					<option value='964'>Option orange 964 - India</option>
+					<option value='965'>Option pear 965 - USA</option>
+					<option value='966'>Option pineapple 966 - Italy</option>
+					<option value='967'>Option cherry 967 - Japan</option>
+					<option value='968'>Option orange 968 - Japan</option>
+					<option value='969'>Option melon 969 - China</option>
+					<option value='970'>Option pineapple 970 - Japan</option>
+					<option value='971'>Option cherry 971 - France</option>
+					<option value='972'>Option apple 972 - Holland</option>
+					<option value='973'>Option apricot 973 - Holland</option>
+					<option value='974'>Option strawberry 974 - India</option>
+					<option value='975'>Option apricot 975 - India</option>
+					<option value='976'>Option melon 976 - Japan</option>
+					<option value='977'>Option cherry 977 - France</option>
+					<option value='978'>Option apricot 978 - Holland</option>
+					<option value='979'>Option cherry 979 - India</option>
+					<option value='980'>Option melon 980 - Canada</option>
+					<option value='981'>Option apple 981 - Italy</option>
+					<option value='982'>Option pear 982 - China</option>
+					<option value='983'>Option cherry 983 - Holland</option>
+					<option value='984'>Option melon 984 - USA</option>
+					<option value='985'>Option melon 985 - Italy</option>
+					<option value='986'>Option cherry 986 - USA</option>
+					<option value='987'>Option melon 987 - China</option>
+					<option value='988'>Option apricot 988 - USA</option>
+					<option value='989'>Option melon 989 - Japan</option>
+					<option value='990'>Option orange 990 - USA</option>
+					<option value='991'>Option pineapple 991 - Holland</option>
+					<option value='992'>Option cherry 992 - France</option>
+					<option value='993'>Option strawberry 993 - Holland</option>
+					<option value='994'>Option strawberry 994 - China</option>
+					<option value='995'>Option melon 995 - France</option>
+					<option value='996'>Option apple 996 - France</option>
+					<option value='997'>Option pineapple 997 - Mexico</option>
+					<option value='998'>Option pear 998 - Mexico</option>
+					<option value='999'>Option strawberry 999 - China</option>
+					<option value='1000'>Option melon 1000 - Mexico</option>
+				</select>
+
+				<br />
+				<a href="#" class='clickToView' style="cursor: hand; border: 1px solid blue; display: inline;">Click here to test the select above</a>
+				<br />
+				Result of a php <a href="http://php.net/manual/en/function.print-r.php">print_r()</a> function: <p style="border: 2px dotted green; display: inline;"> --- </p>
+				<p><a href="#" class='clickToView2' style="cursor: hand; border: 1px solid blue; display: inline;">Click here to hide/show original select</a></p>
+
+				<p>This is the javascript code to launch multiselect2side to #searchable select:</p>
+				<pre>
+$().ready(function() {
+	$('#searchable').multiselect2side({'search': 'Search: '});
+});
+				</pre>
+
+
+				<h3>Demo 1 - Full demo select multiple double side</h3>
+				<p>Select multiple="multiple" modified by multiselect2side</p>
+
+				<select name="firstSelect[]" id='first' multiple='multiple' >
+				<optgroup label="Group1">
+					<option value="1">First Option</option>
+					<option value="2">Option 2th</option>
+					<option value="3" SELECTED >Option selected 3</option>
+				</optgroup>
+					<optgroup label="Group 10-19">
+						<option value="14">Option 14</option>
+						<option value="15">Option 15</option>
+						<option value="16">Option 16</option>
+						<option value="17" SELECTED >Option selected 17</option>
+						<option value="18">Option 18</option>
+					</optgroup>
+					<optgroup label="Group 20-29">
+						<option value="24">Option 24</option>
+						<option value="25">Option 25</option>
+						<option value="26">Option 26</option>
+						<option value="27" SELECTED >Option selected 27</option>
+						<option value="28">Option 28</option>
+					</optgroup>
+					<optgroup label="Group 30-39">
+						<option value="34">Option 34</option>
+						<option value="35">Option 35</option>
+						<option value="36">Option 36</option>
+						<option value="37">Option 37</option>
+						<option value="38">Option 38</option>
+					</optgroup>
+					<optgroup label="Group 40-49">
+						<option value="41">Option 41</option>
+						<option value="42">Option 42</option>
+						<option value="43">Option 43</option>
+						<option value="44">Option 44</option>
+						<option value="45">Option 45</option>
+						<option value="46">Option 46</option>
+						<option value="47">Option 47</option>
+						<option value="48">Option 48</option>
+				</optgroup>
+				</select>
+
+				<br />
+				<a href="#" class='clickToView' style="cursor: hand; border: 1px solid blue; display: inline;">Click here to test the select above</a>
+				<br />
+				Result of a php <a href="http://php.net/manual/en/function.print-r.php">print_r()</a> function: <p style="border: 2px dotted green; display: inline;"> --- </p>
+				<p><a href="#" class='clickToView2' style="cursor: hand; border: 1px solid blue; display: inline;">Click here to hide/show original select</a></p>
+
+				<p>This is the javascript code to launch multiselect2side to #first select:</p>
+				<pre>
+$().ready(function() {
+	$('#first').multiselect2side({
+		optGroupSearch: "Group: ",
+		search: "&lt;img src='img/search.gif' /&gt;"
+	});
+});
+				</pre>
+
+				<h3>Demo 2 - select multiple double side - moveOptions: false, autoSort: true</h3>
+				<p>Move buttons are disabled but is enable autoSort. Header label not present.</p>
+				<select name="secondSelect[]" id='second' multiple='multiple' size='8' >
+					<option value="1">Option a 1</option>
+					<option value="2" SELECTED >Option b 2(sel)</option>
+					<option value="3">Option c 3</option>
+					<option value="4" SELECTED >Option d 4 (sel)</option>
+					<option value="5">Option e 5</option>
+					<option value="6">Option f 6</option>
+					<option value="7">Option g 7</option>
+					<option value="8">Option h 8</option>
+					<option value="9">Option i 9</option>
+					<option value="10" SELECTED >Option l 10 (sel)</option>
+				</select>
+
+				<br />
+				<a href="#" class='clickToView' style="cursor: hand; border: 1px solid blue; display: inline;">Click here to test the select above</a>
+				<br />
+				Result of a php <a href="http://php.net/manual/en/function.print-r.php">print_r()</a> function: <p style="border: 2px dotted green; display: inline;"> --- </p>
+				<p><a href="#" class='clickToView2' style="cursor: hand; border: 1px solid blue; display: inline;">Click here to hide/show original select</a></p>
+
+				<p>This is the javascript code to launch multiselect2side to #second select:</p>
+				<pre>
+$().ready(function() {
+	$('#second').multiselect2side({
+		selectedPosition: 'right',
+		moveOptions: false,
+		labelsx: '',
+		labeldx: '',
+		autoSort: true,
+		autoSortAvailable: true
+		});
+});
+				</pre>
+
+				<h3>Demo 3 - select multiple double side - selectedPosition: 'left'</h3>
+				<p>Elements selected are in the left, label of move buttoms are modified.</p>
+				<select name="thirdSelect[]" id='third' multiple='multiple' size='6' >
+					<option value="1">1Option 1</option>
+					<option value="2" SELECTED >Option 2 (sel)</option>
+					<option value="3">a Option 3</option>
+					<option value="4" SELECTED >This Option 4 (sel)</option>
+					<option value="5">Optaion 5</option>
+					<option value="6">Option 6</option>
+					<option value="7">Odption 7</option>
+					<option value="8">Optaion 8</option>
+					<option value="9">Optdion 9</option>
+					<option value="10" SELECTED >Option 10 (sel)</option>
+				</select>
+
+				<br />
+				<a href="#" class='clickToView' style="cursor: hand; border: 1px solid blue; display: inline;">Click here to test the select above</a>
+				<br />
+				Result of a php <a href="http://php.net/manual/en/function.print-r.php">print_r()</a> function: <p style="border: 2px dotted green; display: inline;"> --- </p>
+				<p><a href="#" class='clickToView2' style="cursor: hand; border: 1px solid blue; display: inline;">Click here to hide/show original select</a></p>
+
+				<p>This is the javascript code to launch multiselect2side to #third select:</p>
+				<pre>
+$().ready(function() {
+	$('#third').multiselect2side({
+		selectedPosition: 'left',
+		moveOptions: true,
+		labelTop: '+ +',
+		labelBottom: '- -',
+		labelUp: '+',
+		labelDown: '-',
+		labelsx: '* Selected *',
+		labeldx: '* Available *',
+		search: "Find: "
+		});
+	$('#third')
+		.multiselect2side('addOption', {name: 'test selected', value: 'test1', selected: true})
+		.multiselect2side('addOption', {name: 'test not selected', value: 'test2', selected: false});
+});
+				</pre>
+
+				<h3>Demo 4 - Select multiple double side with limited number of selectionable options</h3>
+				<p>Select multiple="multiple" with parameter maxSelected, selectionable options limited to 4</p>
+
+				<select name="fourthSelect[]" id='fourth' multiple='multiple' >
+					<option value="1">First Option</option>
+					<option value="2">Option 2th</option>
+					<option value="3" SELECTED >Option selected 3</option>
+					<option value="4"SELECTED>Option 4</option>
+					<option value="5">Option 5</option>
+					<option value="6">Option 6</option>
+					<option value="7" SELECTED >Option selected 7</option>
+					<option value="8">Option 8</option>
+				</select>
+
+				<br />
+				
+
+				<p>This is the javascript code to launch multiselect2side to #fourth select:</p>
+				<pre>
+$().ready(function() {
+	$('#fourth').multiselect2side({maxSelected: 4});
+
+	$('#fourth')
+		.multiselect2side('addOption', {name: 'test selected', value: 'test1', selected: true})
+		.multiselect2side('addOption', {name: 'test not selected', value: 'test2', selected: false});
+});
+				</pre>
+
+
+				<h3>Documentation</h3>
+
+				<p>
+				To use this jquery plugin:<br />
+				<ul>
+				<li>
+				include the js in the head section of the page:
+				<pre>
+&lt;head&gt;
+...
+&lt;link rel="stylesheet" href="css/jquery.multiselect2side.css" type="text/css" media="screen" /&gt;
+
+&lt;script type="text/javascript" src="js/jquery.js" &gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/jquery.multiselect2side.js" &gt;&lt;/script&gt;
+...
+&lt;/head&gt;
+				</pre>
+				</li>
+				<li>
+				in the read function launch the multiselect2side (select multiple double side) relative at your element:
+				<pre>
+&lt;script type="text/javascript"&gt;
+$().ready(function() {
+	$("select").multiselect2side();
+});
+&lt;/script&gt;
+				</pre>
+				</li>
+				</ul>
+				For comments <a href="http://www.senamion.com/blog/2010/02/20/jquery-select-multiple-double-side/">see the blog page</a>.
+				</p>
+				<h4>Options:</h4>
+				<ul>
+					<li>optGroupSearch - use optgroup label to select elements - default false</li>
+					<li>minSize - default minSize of selects - default 6</li>
+					<li>selectedPosition - position of selected elements - default 'right'</li>
+					<li>moveOptions - show move options - default true</li>
+					<li>labelTop - label of top buttom - default 'Top'</li>
+					<li>labelBottom - label of bottom buttom - default 'Bottom'</li>
+					<li>labelUp - label of up buttom - default 'Up'</li>
+					<li>labelDown - label of down buttom - default 'Down'</li>
+					<li>labelSort - label of sort buttom - default 'Sort'</li>
+					<li>maxSelected - number of max selectable options</li>
+					<li>labelsx: Left label - default '* Selected *'</li>
+					<li>labeldx: Right label - default '* Available *'</li>
+					<li>autoSort: Automatic sort of selected options - default false</li>
+					<li>autoSortAvailable: Automatic sort of available options - default false</li>
+					<li>search: string for add search funcionality - default false = no search</li>
+					<li>caseSensitive: type of search - default false</li>
+					<li>delay: the delay in milliseconds the search option waits after a keystroke to activate itself - default 200</li>
+				</ul>
+
+
+				<h4>Methods:</h4>
+				<ul>
+					<li>destroy - destroy multiselect2side</li>
+					<li>addOption - add option to select(s). See example #fourth and #third selects above. Options:
+						<ul>
+							<li>name: name of new value</li>
+							<li>value: value of new value</li>
+							<li>selected: if true option is inserted in "selected" list, else in "available"</li>
+						</ul>
+					</li>
+				</ul>
+
+				<h3 id='download'>Download</h3>
+				<p>
+					You can download the entire archive:
+					<ul>
+						<li><a href="jquery.multiselect2side.zip">jquery.multiselect2side.zip</a> - a zip archive containing the plugin source, a minified version of jQuery and a demo page.</li>
+					</ul>
+					Or single file:
+					<ul>
+						<li><a href="jquery.multiselect2side/js/jquery.multiselect2side.js">jquery.multiselect2side.js</a> - js code.</li>
+						<li><a href="jquery.multiselect2side/css/jquery.multiselect2side.css">jquery.multiselect2side.css</a> - css code.</li>
+						<li><a href="jquery.multiselect2side/img/close.gif">close.gif</a> - close icon.</li>
+						<li><a href="jquery.multiselect2side/img/loading.gif">loading.gif</a> - loading icon.</li>
+						<li><a href="jquery.multiselect2side/img/search.gif">search.gif</a> - search icon.</li>
+					</ul>
+				</p>
+
+
+				<h3>Release</h3>
+				<p>
+				<ul>
+					<li><strong>1.1</strong> - May 04 2011 - correct some little bugs</li>
+					<li><strong>1.0</strong> - Apr 04 2011 - new optGroupSearch and minSize options, new methods destroy and addOption</li>
+					<li><strong>0.16</strong> - Mar 15 2011 - new autoSortAvailable option</li>
+					<li><strong>0.15</strong> - Mar 14 2011 - new search options</li>
+					<li><strong>0.14</strong> - Feb 2 2011 - correct FF autoSort bug</li>
+					<li><strong>0.13</strong> - Jan 26 2011 - new autoSort parameter</li>
+					<li><strong>0.12</strong> - Nov 19 2010 - correct opera bug + new demo</li>
+					<li><strong>0.11</strong> - Aug 26 2010 - correct ie6 bug</li>
+					<li><strong>0.10</strong> - Jul 20 2010 - correct ie8 bug (padding-top)</li>
+					<li><strong>0.9</strong> - Jul 16 2010 - new labels button (left and right label)</li>
+					<li><strong>0.8</strong> - May 17 2010 - new sort button (if moveOptions is true)</li>
+					<li><strong>0.7</strong> - May 16 2010 - correct order options bug</li>
+					<li><strong>0.6</strong> - Avr 16 2010 - correct bug with optgroup</li>
+					<li><strong>0.5</strong> - Avr 15 2010 - Now move and updown options are vertically centered</li>
+					<li><strong>0.4</strong> - Avr 12 2010 - New option maxSelected</li>
+					<li><strong>0.3</strong> - Avr  1 2010 - New CSS</li>
+					<li><strong>0.2</strong> - Mar 25 2010 - New parameters moveOptions (default true)</li>
+					<li><strong>0.1</strong> - Mar 22 2010 - New parameters selectedPosition (default 'right')</li>
+					<li><strong>0.0</strong> - Feb 19 2010 - First release of multiselect2side (select multiple double side)</li>
+				</ul>
+				</p>
+
+
+				<h3>License</h3>
+				<p>
+				Dual licensed under the MIT and GPL licenses. 
+				</p>
+
+</body>
+</html>

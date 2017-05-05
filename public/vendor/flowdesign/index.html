@@ -1,0 +1,338 @@
+
+<!DOCTYPE HTML>
+<html>
+ <head>
+    
+  <title>流程设计器 Flowdesign.leipi.org</title>
+  <meta name="keyword" content="流程设计器,Web Flowdesign,Flowdesigner,专业流程设计器,WEB流程设计器">
+  <meta name="description" content="国内最容易使用和开发的流程设计器，你可以在此基础上任意修改使功能无限强大！">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="author" content="leipi.org">
+    <link href="Public/css/bootstrap/css/bootstrap.css?2025" rel="stylesheet" type="text/css" />
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="Public/css/bootstrap/css/bootstrap-ie6.css?2025">
+    <![endif]-->
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="Public/css/bootstrap/css/ie.css?2025">
+    <![endif]-->
+    <link href="Public/css/site.css?2025" rel="stylesheet" type="text/css" />
+
+
+    <script type="text/javascript">
+        /*var _root='http://flow/index.php?s=/',_controller = 'index';*/
+    </script>
+    
+
+<link rel="stylesheet" type="text/css" href="Public/js/flowdesign/flowdesign.css" media="screen" />
+
+<!--select 2-->
+<link rel="stylesheet" type="text/css" href="Public/js/jquery.multiselect2side/css/jquery.multiselect2side.css" media="screen" />
+
+ </head>
+<body>
+
+<!-- fixed navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+
+    
+    <div class="container">
+
+      <div class="pull-right">
+        <button class="btn btn-info" type="button" id="leipi_save">保存设计</button>
+        <button class="btn btn-danger" type="button" id="leipi_clear">清空连接</button>
+      </div>
+
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+           <li class="dropdown">
+              <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-th-list icon-white"></i> 菜单<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li class="active"><a href="/">流程设计器</a></li>
+                <li ><a href="http://flowdesign.leipi.org/feedback.html">意见征集</a></li>
+                <li><a href="http://formdesign.leipi.org" target="_blank"><i class="icon-share-alt"></i> 表单设计器</a></li>
+                <li><a href="http://qrcode.leipi.org" target="_blank"><i class="icon-share-alt"></i> 二维码自动生成</a></li>
+                <li><a href="http://www.leipi.org" target="_blank"><i class="icon-share-alt"></i> 雷劈网</a></li>
+              </ul>
+            </li>
+            <li><a href="http://flowdesign.leipi.org/doc.html">开发文档</a></li>
+            <li><a href="http://flowdesign.leipi.org/downloads.html"><i class="icon-arrow-down icon-white"></i>下载</a></li>
+            <li><a href="javascript:void(0);">正在设计【请假申请流程】</a></li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+
+<!-- Modal -->
+<div id="alertModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>消息提示</h3>
+  </div>
+  <div class="modal-body">
+    <p>提示内容</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">我知道了</button>
+  </div>
+</div>
+
+<!-- attributeModal -->
+<div id="attributeModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:800px;margin-left:-350px">
+  <div class="modal-body" style="max-height:500px;"><!-- body --></div>
+  <div class="modal-footer" style="padding:5px;">
+    <a href="http://www.leipi.org" target="_blank"><img src="http://www.leipi.org/wp-content/themes/leipi/images/leipi.png" alt="雷劈认证 icon" style="width:40px"></a>
+    <!--a href="#" class="btn btn-danger" data-dismiss="modal" aria-hidden="true"><i class="icon-remove icon-white"></i></a-->
+  </div>
+</div>
+
+
+
+<!--contextmenu div-->
+<div id="processMenu" style="display:none;">
+  <ul>
+    <li id="setting"><i class=" icon-wrench"></i>&nbsp;<span class="_label">设置</span></li>
+    <li id="begin"><i class="icon-play"></i>&nbsp;<span class="_label">设为第一步</span></li>
+    <li id="addson"><i class="icon-plus"></i>&nbsp;<span class="_label">添加子步骤</span></li>
+    <li id="copy"><i class="icon-check"></i>&nbsp;<span class="_label">复制</span></li>
+    <li id="delete"><i class="icon-trash"></i>&nbsp;<span class="_label">删除</span></li>
+    <li id="attribute"><i class="icon-cog"></i>&nbsp;<span class="_label">属性</span></li>
+  </ul>
+</div>
+<div id="canvasMenu" style="display:none;">
+  <ul>
+    <li id="add"><i class="icon-plus"></i>&nbsp;<span class="_label">添加步骤</span></li>
+    <li id="save"><i class="icon-ok"></i>&nbsp;<span class="_label">保存设计</span></li>
+    <li id="refresh"><i class="icon-refresh"></i>&nbsp;<span class="_label">刷新 F5</span></li>
+    <li id="paste"><i class="icon-share"></i>&nbsp;<span class="_label">粘贴</span></li>
+    <li id="help"><i class="icon-search"></i>&nbsp;<span class="_label">帮助</span></li>
+  </ul>
+</div>
+<!--end div--> 
+
+<div class="container mini-layout" id="flowdesign_canvas">
+<!--div class="process-step btn" style="left: 189px; top: 340px;"><span class="process-num badge badge-inverse"><i class="icon-star icon-white"></i>3</span> 步骤3</div-->
+</div> <!-- /container -->
+
+
+
+
+
+    
+<div class="navbar navbar-fixed-bottom" style="color:#666;text-align:right">
+  <a href="http://www.leipi.org" title="雷劈网"><img src="http://www.leipi.org/wp-content/themes/leipi/images/leipi.png" alt="雷劈认证 icon" style="height:25px"></a> &copy;2014 Flowdesign.leipi.org <a href="http://www.miitbeian.gov.cn/" target="_blank"  style="color:#666">粤ICP备13051130号</a>
+</div>
+  
+
+
+ 
+   
+
+<script type="text/javascript" src="Public/js/jquery-1.7.2.min.js?2025"></script>
+<script type="text/javascript" src="Public/css/bootstrap/js/bootstrap.min.js?2025"></script>
+
+<script type="text/javascript" src="Public/js/jquery-ui/jquery-ui-1.9.2-min.js?2025" ></script>
+<script type="text/javascript" src="Public/js/jsPlumb/jquery.jsPlumb-1.3.16-all-min.js?2025"></script>
+<script type="text/javascript" src="Public/js/jquery.contextmenu.r2.js?2025"></script>
+<!--select 2-->
+<script type="text/javascript" src="Public/js/jquery.multiselect2side/js/jquery.multiselect2side.js?2025" ></script>
+
+<script type="text/javascript" src="Public/js/flowdesign/leipi.flowdesign.v2.js?2025"></script>
+<script type="text/javascript">
+$(function(){
+  var alertModal = $('#alertModal'),attributeModal =  $("#attributeModal");
+  //消息提示
+  mAlert = function(messages,s)
+  { 
+      if(!messages) messages = "";
+      if(!s) s = 2000;
+      alertModal.find(".modal-body").html(messages);
+      alertModal.modal('toggle');
+      setTimeout(function(){alertModal.modal("hide")},s);
+  }
+  //属性设置
+  attributeModal.on("hidden", function() {
+      $(this).removeData("modal");//移除数据，防止缓存
+  });
+  ajaxModal = function(url,fn)
+  {
+      url += url.indexOf('?') ? '&' : '?';
+      url += '_t='+ new Date().getTime();
+      attributeModal.modal({
+        remote:url
+      })
+      //加载完成执行
+      if(fn)
+      {
+        attributeModal.on('shown',fn);
+      }
+
+      
+  }
+
+function page_reload()
+{
+    location.reload();
+}
+
+ 
+
+  /*
+  php 命名习惯 单词用下划线_隔开
+  js 命名习惯：首字母小写 + 其它首字线大写
+  */
+    /*步骤数据*/
+    var processData = {"total":2,"list":{
+        "37":{
+            "id":"37",//当前步骤ID
+            "flow_id":"8",//所属流程ID
+            "process_name":"填写表单",//步骤名称
+            "process_to":"38",//下一步 多个用 逗号隔开
+            "icon":"icon-play",//图标
+            "style":"left:183px;top:68px;color:#0e76a8;"//样式
+        },
+        "38":{"id":"38","flow_id":"8","icon":"icon-plane","process_name":"部门主管审批","process_to":"39","style":"left:133px;top:184px;width:200px;height:30px"},
+        "39":{"id":"39","flow_id":"8","icon":"icon-star-empty","process_name":"老板审批","process_to":"0","style":"left:133px;top:338px;width:200px;height:50px"}
+      }};
+    /*创建流程设计器*/
+    var _canvas = $("#flowdesign_canvas").Flowdesign({
+                      "processData":processData
+                      /*画面右键*/
+                      ,canvasMenus:{
+                        "add": function(t) {
+                            var mLeft = $("#jqContextMenu").css("left"),mTop = $("#jqContextMenu").css("top");
+                            //alert("当前位置 left:"+mLeft + " top:" + mTop);
+                            var url = "data/add_process.html";
+                            $.post(url,{"left":mLeft,"top":mTop},function(data){
+                                alert(data.success);
+                                page_reload();//刷新加载页面 
+                            },'json');
+
+                        },
+                        "save": function(t) {
+                            var processInfo = _canvas.getProcessInfo();//连接信息
+                            alert(processInfo);
+                        },
+                         //刷新
+                        "refresh":function(t){_canvas.refresh();},
+                        "paste": function(t) {
+                            var pasteId = _canvas.paste();//右键当前的ID
+                            if(pasteId<=0)
+                            {
+                              alert("你未复制任何步骤");
+                              return ;
+                            }
+                            alert("粘贴:" + pasteId);
+                        },
+                        "help": function(t) {
+                           
+                            alert("查看帮助");
+                        }
+                       
+                      }
+                      /*步骤右键*/
+                      ,processMenus: {
+                          "setting": function(t) {
+                              var activeId = _canvas.getActiveId();//右键当前的ID
+                              alert("设置:"+activeId);
+                          },
+                          "begin":function(t)
+                          {
+                              var activeId = _canvas.getActiveId();//右键当前的ID
+                              alert("设为第一步:"+activeId);
+                          },
+                          "addson":function(t)
+                          {
+                              var activeId = _canvas.getActiveId();//右键当前的ID
+                              alert("添加子步骤:"+activeId);
+                          },
+                          "copy":function(t)
+                          {
+                              //var activeId = _canvas.getActiveId();//右键当前的ID
+                              _canvas.copy();//右键当前的ID
+                              alert("复制成功");
+                          },
+                          "delete":function(t)
+                          {
+                              var activeId = _canvas.getActiveId();//右键当前的ID
+                              alert("删除:"+activeId);
+                          },
+                          "attribute":function(t)
+                          {
+                              var activeId = _canvas.getActiveId();//右键当前的ID
+                              //alert("属性:"+activeId);
+                              
+                              ajaxModal('Public/js/flowdesign/attribute.html?id='+activeId,function(){
+                                //alert('加载完成执行')
+                              });
+
+                              
+                          }
+                      }
+                      ,fnRepeat:function(){
+                        //alert("步骤连接重复1");//可使用 jquery ui 或其它方式提示
+                        mAlert("步骤连接重复了，请重新连接");
+                        
+                      }
+                      ,fnClick:function(){
+                          alert("单击了节点");
+                      }
+                      ,fnDbClick:function(){
+                          alert("双击了节点");
+                      }
+                  });
+
+
+    /*保存*/
+    $("#leipi_save").bind('click',function(){
+        var processInfo = _canvas.getProcessInfo();//连接信息
+        alert(processInfo);
+    });
+    /*清除*/
+    $("#leipi_clear").bind('click',function(){
+        if(_canvas.clear())
+        {
+          //alert("清空连接成功");
+          mAlert("清空连接成功，你可以重新连接");
+        }else
+        {
+          //alert("清空连接失败");
+          mAlert("清空连接失败");
+        }
+    });
+
+
+  
+});
+
+ 
+</script>
+
+<div style="display: none;">                                                                   
+88888888888  88                             ad88  88                ad88888ba   8888888888   
+88           ""                            d8"    88               d8"     "88  88           
+88                                         88     88               8P       88  88  ____     
+88aaaaa      88  8b,dPPYba,   ,adPPYba,  MM88MMM  88  8b       d8  Y8,    ,d88  88a8PPPP8b,  
+88"""""      88  88P'   "Y8  a8P_____88    88     88  `8b     d8'   "PPPPPP"88  PP"     `8b  
+88           88  88          8PP"""""""    88     88   `8b   d8'            8P           d8  
+88           88  88          "8b,   ,aa    88     88    `8b,d8'    8b,    a8P   Y8a     a8P  
+88           88  88           `"Ybbd8"'    88     88      Y88'     `"Y8888P'     "Y88888P"   
+                                                          d8'                                
+2014-3-15 Firefly95、xinG、                               d8'  
+</div>
+<div style="display:none">
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F1e6fd3a46a5046661159c6bf55aad1cf' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</div>
+</body>
+</html>

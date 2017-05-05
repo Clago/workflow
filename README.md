@@ -4,11 +4,15 @@
 
 ![image](https://github.com/Clago/workflow/raw/master/screenshots/2.jpg)
 
-![image](https://github.com/Clago/workflow/raw/master/screenshots/3.jpg)
+## 使用
+`cp .env.example .env`
 
-![image](https://github.com/Clago/workflow/raw/master/screenshots/4.jpg)
+`composer install`
 
-![image](https://github.com/Clago/workflow/raw/master/screenshots/5.jpg)
+导入数据库文件,文件地址：`database/sql/workflow_data.sql`
+
+初始账号:
+`1@qq.com 2@qq.com 3@qq.com 4@qq.com 5@qq.com 6@qq.com 7@qq.com 8@qq.com 9@qq.com 10@qq.com 密码统一为:123456`
 
 ## 感谢
 [流程设计前端](https://github.com/payonesmile/flowdesign)
