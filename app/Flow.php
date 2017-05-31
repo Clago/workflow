@@ -8,7 +8,7 @@ class Flow extends Model
 {
     protected $table="flow";
 
-    protected $fillable=['flow_no','flow_name','template_id','flowchart','jsplumb','is_publish','is_show'];
+    protected $fillable=['flow_no','flow_name','template_id','flowchart','jsplumb','is_publish','is_show','type_id'];
 
     public function process(){
     	return $this->hasMany('App\Process','flow_id');

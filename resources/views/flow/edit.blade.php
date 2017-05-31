@@ -18,6 +18,7 @@
           <div class="form-group">
             <label for="exampleInputPassword1">当前模板</label>
             <select class="form-control" name="template_id">
+              <option value="0">无</option>
               @foreach($templates as $v)
               <option value="{{$v->id}}" @if($v->id==$flow->template_id) selected="selected" @endif>{{$v->template_name}}</option>
               @endforeach
@@ -26,7 +27,7 @@
 
           <div class="form-group">
             <label for="exampleInputPassword1">流程分类</label>
-            <select class="form-control" name="template_id">
+            <select class="form-control" name="type_id">
               @foreach($flow_types as $v)
               <option value="{{$v->id}}" @if($v->id==$flow->type_id) selected="selected" @endif>{{$v->type_name}}</option>
               @endforeach

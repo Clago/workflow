@@ -4,6 +4,11 @@
 
 ![image](https://github.com/Clago/workflow/raw/master/screenshots/2.jpg)
 
+## 功能
+- 1.绘制流程图
+- 2.条件流转支持
+- 3.子流程
+
 ## 使用
 `cp .env.example .env`
 
