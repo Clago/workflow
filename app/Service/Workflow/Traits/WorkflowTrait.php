@@ -32,5 +32,7 @@ trait WorkflowTrait{
                 'child'=>$proc->process_id
             ]);
         }
+
+        $proc->entry->emp->notify(new \App\Notifications\Flowfy(Proc::find($proc->id)));
 	}
 }

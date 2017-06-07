@@ -257,6 +257,8 @@ class Workflow implements WorkflowInterface{
 			                            'child'=>0,
 			                            'process_id'=>$proc->entry->enter_process->child_back_process
 			                        ]);
+			                        //流程结束通知
+	    							$proc->entry->emp->notify(new \App\Notifications\Flowfy(Proc::find($proc->id)));
 	                        	}else{
 	                        		$this->goToProcess($proc->entry->parent_entry,$parent_flowlink->next_process_id);
 
@@ -270,6 +272,9 @@ class Workflow implements WorkflowInterface{
 	                        $proc->entry->parent_entry->save();
 	                    }
 	                    
+	                }else{
+	                	//流程结束通知
+	    				$proc->entry->emp->notify(new \App\Notifications\Flowfy(Proc::find($proc->id)));
 	                }
 	            }else{
 	                //'entry_id','flow_id','process_id','emp_id','status','content','is_read'
