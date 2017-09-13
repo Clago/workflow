@@ -142,6 +142,22 @@ class ProcessController extends Controller
 
             $process=Process::findOrFail($id);
 
+            if(in_array($data['process_position'], [9])){
+                if(Flowlink::where('process_id',$id)->where("type","Condition")->count()>1){
+                    return redirect()->back()->with(['status_code'=>1,'message'=>'该节点是分支节点，不能设置为结束或起始步骤']);
+                }
+            }
+
+            if(in_array($data['process_position'], [0])){
+                Process::where(['flow_id'=>$process->flow_id,'position'=>0])->update([
+                    'position'=>1
+                ]);
+
+                Process::where(['flow_id'=>$process->flow_id,'id'=>$id])->update([
+                    'position'=>0
+                ]);
+            }
+
             $process->update([
                 'process_name'=>$process_name,
                 'style_color'=>$style_color,
@@ -410,6 +426,13 @@ class ProcessController extends Controller
         $flow_id=$request->input('flow_id',0);
         $process_id=$request->input('process_id',0);
 
+        if(Flowlink::where('process_id',$process_id)->where("type","Condition")->where('next_process_id','>','-1')->count()>1){
+            return response()->json([
+                'status_code'=>1,
+                'message'=>'该节点是分支节点，不能设置为结束步骤'
+            ]);
+        }
+
         Process::where(['flow_id'=>$flow_id,'position'=>0])->update([
             'position'=>1
         ]);
@@ -427,7 +450,7 @@ class ProcessController extends Controller
         $flow_id=$request->input('flow_id',0);
         $process_id=$request->input('process_id',0);
 
-        if(Flowlink::where('process_id',$process_id)->where('next_process_id','>','-1')->count()>1){
+        if(Flowlink::where('process_id',$process_id)->where("type","Condition")->where('next_process_id','>','-1')->count()>1){
             return response()->json([
                 'status_code'=>1,
                 'message'=>'该节点是分支节点，不能设置为结束步骤'

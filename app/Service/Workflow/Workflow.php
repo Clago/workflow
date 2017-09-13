@@ -247,7 +247,7 @@ class Workflow implements WorkflowInterface{
 	                        	$this->goToProcess($proc->entry->parent_entry,$proc->entry->enter_process->child_back_process);
 	                            $proc->entry->parent_entry->process_id=$proc->entry->enter_process->child_back_process;
 	                        }else{
-	                        	//默认进入当前子流程步骤下一步
+	                        	//默认进入父流程步骤下一步
 	                        	$parent_flowlink=Flowlink::where(['process_id'=>$proc->entry->enter_process->id,"type"=>"Condition"])->first();
 
 	                        	//判断是否为最后一步
@@ -263,12 +263,12 @@ class Workflow implements WorkflowInterface{
 	                        		$this->goToProcess($proc->entry->parent_entry,$parent_flowlink->next_process_id);
 
 	                                $proc->entry->parent_entry->process_id=$parent_flowlink->next_process_id;
+	                                $proc->entry->parent_entry->status=0;
 	                        	}
 	                        }
 
 	                        $proc->entry->parent_entry->child=0;
-	                        $proc->entry->parent_entry->status=0;
-
+	                        
 	                        $proc->entry->parent_entry->save();
 	                    }
 	                    

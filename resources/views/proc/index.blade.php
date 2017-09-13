@@ -47,7 +47,6 @@
                       @elseif($v->status==-1)
                         <button class="btn btn-xs btn-danger">驳回</button>
                       @endif
-                      
                       @if($child=\App\Entry::where('pid',$v->entry->id)->whereIn('enter_proc_id',explode(',',$v->id))->first())
                       <a href="/proc/children?entry_id={{$child->id}}" class="btn btn-xs btn-primary">子流程</a>
                       @endif
