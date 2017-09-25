@@ -13,7 +13,7 @@ class Workflow implements WorkflowInterface{
 	 * [getNextAuditorIds 获得下一步审批人员工id
 	 * @return []
 	 */
-	protected function getProcessAuditorIds(Entry $entry,int $process_id){
+	protected function getProcessAuditorIds(Entry $entry,$process_id){
 		$auditor_ids=[];
 		//查看是否自动选人
 		if($flowlink=Flowlink::where('type','Sys')->where('process_id',$process_id)->first()){
@@ -123,7 +123,7 @@ class Workflow implements WorkflowInterface{
 	 * @param  [type] $process_id [description]
 	 * @return [type]             [description]
 	 */
-	public function flowlink(int $process_id){
+	public function flowlink($process_id){
 	    $proc=Proc::with('entry.emp.dept')->where(['emp_id'=>Auth::id()])->where(["status"=>0])->findOrFail($process_id);
 
 	    if(Flowlink::where(['process_id'=>$proc->process_id,"type"=>"Condition"])->count()>1){
@@ -329,7 +329,7 @@ class Workflow implements WorkflowInterface{
 	 * @param  [type] $process_id [description]
 	 * @return [type]             [description]
 	 */
-	protected function goToProcess(Entry $entry,int $process_id){
+	protected function goToProcess(Entry $entry,$process_id){
 	    $auditor_ids=$this->getProcessAuditorIds($entry,$process_id);
 
 	    $auditors=Emp::whereIn('id',$auditor_ids)->get();
