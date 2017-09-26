@@ -94,7 +94,7 @@ class ProcessController extends Controller
             return response()->json($res);
         }catch(\Exception $e){
             DB::rollback();
-            dd($e);
+            return redirect()->back()->with(['status_code'=>-1,'message'=>$e->getMessage()]);
         }
     }
 
@@ -365,7 +365,7 @@ class ProcessController extends Controller
             return response()->json(['status_code'=>0,'message'=>'删除成功']);
         }catch(\Exception $e){
             DB::rollback();
-            dd($e);
+            return redirect()->back()->with(['status_code'=>-1,'message'=>$e->getMessage()]);
         }
     }
 

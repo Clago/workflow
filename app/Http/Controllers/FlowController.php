@@ -199,7 +199,7 @@ class FlowController extends Controller
             ]);
 
         }catch(\Exception $e){
-            dd($e);
+            return redirect()->back()->with(['status_code'=>1,'message'=>$e->getMessage()]);
         }
     }
 }

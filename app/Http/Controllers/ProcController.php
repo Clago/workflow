@@ -135,8 +135,8 @@ class ProcController extends Controller
 
             DB::commit();
         }catch(\Exception $e){
-            dd($e);
             DB::rollback();
+            return redirect()->back()->with(['success'=>-1,'message'=>$e->getMessage()]);
         }
         
         return response()->json(['status_code'=>0]);

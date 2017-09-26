@@ -93,7 +93,7 @@ class EntryController extends Controller
             return redirect()->to('/');
         }catch(\Exception $e){
             DB::rollback();
-            dd($e);
+            return redirect()->back()->with(['success'=>-1,'message'=>$e->getMessage()]);
         }
     }
 
@@ -206,7 +206,7 @@ class EntryController extends Controller
 
         }catch(\Exception $e){
             DB::rollback();
-            dd($e);
+            return redirect()->back()->with(['success'=>-1,'message'=>$e->getMessage()]);
         }
         
     }
@@ -227,7 +227,7 @@ class EntryController extends Controller
 
         }catch(\Exception $e){
             DB::rollback();
-            dd($e);
+            return redirect()->back()->with(['success'=>-1,'message'=>$e->getMessage()]);
         }
         
     }

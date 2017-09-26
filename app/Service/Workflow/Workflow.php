@@ -24,11 +24,17 @@ class Workflow implements WorkflowInterface{
 
 			if($flowlink->auditor=='-1001'){
 				//发起人部门主管
+				if(empty($entry->emp->dept)){
+					return $auditor_ids;
+				}
 				$auditor_ids[]=$entry->emp->dept->director_id;
 			}
 
 			if($flowlink->auditor=='-1002'){
 				//发起人部门经理
+				if(empty($entry->emp->dept)){
+					return $auditor_ids;
+				}
 				$auditor_ids[]=$entry->emp->dept->manager_id;
 			}
 		}else{
@@ -97,7 +103,7 @@ class Workflow implements WorkflowInterface{
 	    //步骤流转
 	    //步骤审核人
 	    $auditors=Emp::whereIn('id',$auditor_ids)->get();
-	    if(empty($auditors)){
+	    if($auditors->count()<1){
 	        throw new \Exception("下一步骤未找到审核人", 1);
 	    }
 	    $time=time();
@@ -163,9 +169,13 @@ class Workflow implements WorkflowInterface{
 	        }
 
 	        $auditor_ids=$this->getProcessAuditorIds($proc->entry,$flowlink->next_process_id);
+	        if(empty($auditor_ids)){
+	        	throw new \Exception("下一步骤未找到审核人", 1);
+	        }
+
 	        $auditors=Emp::whereIn('id',$auditor_ids)->get();
 
-	        if(empty($auditors)){
+	        if($auditors->count()<1){
 	            throw new \Exception("下一步骤未找到审核人", 1);
 	        }
 
@@ -281,7 +291,7 @@ class Workflow implements WorkflowInterface{
 	                $auditor_ids=$this->getProcessAuditorIds($proc->entry,$flowlink->next_process_id);
 	                $auditors=Emp::whereIn('id',$auditor_ids)->get();
 
-	                if(empty($auditors)){
+	                if($auditors->count()<1){
 	                    throw new \Exception("下一步骤未找到审核人", 1);
 	                }
 	                foreach($auditors as $v){
@@ -334,7 +344,7 @@ class Workflow implements WorkflowInterface{
 
 	    $auditors=Emp::whereIn('id',$auditor_ids)->get();
 
-	    if(empty($auditors)){
+	    if($auditors->count()<1){
 	        throw new \Exception("下一步骤未找到审核人", 1);
 	    }
 	    $time=time();

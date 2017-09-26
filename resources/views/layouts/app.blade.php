@@ -116,8 +116,10 @@
     $(function(){
         var success='{{Session::get("success")}}';
         var message='{{Session::get("message")}}';
-        if(success){
+        if(success==1){
             toastr.success(message);
+        }else if(success==-1){
+            toastr.error(message);
         }
 
         //后台删除公共函数
