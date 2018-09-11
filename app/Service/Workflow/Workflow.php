@@ -1,7 +1,7 @@
 <?php
 namespace Workflow;
 
-use App\Entry,App\Flowlink,App\Emp,App\ProcessVar,App\EntryData,App\Proc;
+use App\Entry,App\Flowlink,App\Emp,App\ProcessVar,App\EntryData,App\Proc,App\Process;
 use DB,Auth;
 
 use Workflow\Traits\WorkflowTrait;
@@ -155,6 +155,7 @@ class Workflow implements WorkflowInterface{
 	            	break;
 	            }else{
 	            	$$field=$value;
+	            	$res = null;
 		            eval('$res='.$v->expression.';');
 		            if($res){
 		                $flowlink=$v;
